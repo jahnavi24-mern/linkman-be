@@ -11,6 +11,10 @@ exports.handleRedirect = async (req, res) => {
             return res.status(404).json({ message: "Shortened link not found" });
         }
 
+        if (link.linkExpiration && new Date(link.linkExpiration) < new Date()) {
+            return res.status(410).json({ message: "This link has expired" });
+        }
+
         link.clicks += 1;
         await link.save();
 
