@@ -17,11 +17,13 @@ exports.handleRedirect = async (req, res) => {
         const deviceType = getDeviceType(req.headers["user-agent"]); 
         const browser = getBrowser(req.headers["user-agent"]);
 
+        const ipAddress = req.ip; 
+
         await Analytics.create({
             link: link._id,
             deviceType,
             browser,
-            ipAddress: req.ip,
+            ipAddress,
         });
 
         return res.redirect(link.originaLink);

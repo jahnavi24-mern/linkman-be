@@ -23,6 +23,8 @@ async function startServer() {
           credentials: true,
         })
       )
+      app.set('trust proxy', true);
+
       app.use("/api/auth", authRoute);
       app.use("/api/link", linkRoute);
       app.use("/api/analytics", analyticsRoute);
